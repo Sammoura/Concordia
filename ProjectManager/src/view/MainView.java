@@ -22,24 +22,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
-import controller.MainController;
-
-import model.MainModel;
 import model.Project;
-import javax.swing.JButton;
-import javax.swing.JSeparator;
 
 @SuppressWarnings("serial")
 public class MainView extends JFrame {
 	
-	
-	// LoginArea
-	private Login loginPage;
-
 	// MenuBar
 	private JMenuBar menuBar;
 	
@@ -79,9 +71,6 @@ public class MainView extends JFrame {
 		
 		// MainFrame setup (title, layout, dimensions)
 		super("My Project Manager");							// calls super constructor in JFrame and assigning our Apps title
-				
-		loginPage = new Login();
-
 		// layout
 		borderLayout = new BorderLayout();
 		getContentPane().setLayout(borderLayout);								// divides the Main Frame into 5 regions NORTH, SOUTH, EAST, WEST and CENTER
@@ -284,12 +273,7 @@ public class MainView extends JFrame {
 	public TreePanel getTreePanel() {
 		return projectsTree;
 	}
-	
-	// to be used in the controller
-	public Login getLoginPage() {
-		return loginPage;
-	}
-	
+		
 	public TablePanel getTablePanel() {
 		return tablePanel;
 	}

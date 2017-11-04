@@ -13,7 +13,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class SignupPage extends JFrame {
+public class SignupView extends JFrame {
 
 	private JTextField signupUN;
 	private JPasswordField signupPW, signupCPW;
@@ -21,7 +21,7 @@ public class SignupPage extends JFrame {
 	private JPanel signupPanel;
 	private JComboBox<String> comboBox;
 	
-	public SignupPage(){
+	public SignupView(){
 		super("My Project Manager");							// calls super constructor in JFrame and assigning our Apps title
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);			// the application doesn't exit on closing by default
 		setSize(500,380);										// sets default size for card1

@@ -12,15 +12,14 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class Login extends JFrame {
+public class LoginView extends JFrame {
 
-	private SignupPage signupFrame;
 	private JTextField usernameTextField;
 	private JTextField PasswordTextField;
 	private JButton loginButton, registerBtn;
 	private JPanel loginPanel;
 
-	public Login(){
+	public LoginView(){
 		// MainFrame setup (title, layout, dimensions)
 		super("My Project Manager");							// calls super constructor in JFrame and assigning application title
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);			// the application doesn't exit on closing by default
@@ -65,7 +64,6 @@ public class Login extends JFrame {
 //		loginButton.setBackground(Color.getHSBColor(2.1f, 0.9f, 0.9f));
 		loginPanel.add(loginButton);
 
-		signupFrame = new SignupPage();
 		registerBtn = new JButton("REGISTER");
 		registerBtn.setFont(new Font("Courier New Bold Italic", Font.BOLD, 18));
 		registerBtn.setBounds(250, 170, 200, 40);
@@ -84,10 +82,6 @@ public class Login extends JFrame {
 
 	public String getPassword(){
 		return PasswordTextField.getText();
-	}
-
-	public SignupPage getSignupFrame(){
-		return signupFrame;
 	}
 	
 	public void clearLoginForm(){

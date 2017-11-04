@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,18 +18,18 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import org.jfree.ui.RefineryUtilities;
+
 import model.Activity;
 import model.Job;
 import model.MainModel;
 import model.Member;
 import model.Project;
 import model.Status;
-
-import org.jfree.ui.RefineryUtilities;
-
 import view.ActivityPanel;
 import view.EditableList;
 import view.GanttView;
+import view.LoginView;
 import view.MainView;
 import view.MemberListView;
 import view.ProjectPanel;
@@ -61,11 +60,12 @@ public class MainController {
 	private ActivityPanel actPanel;
 
 	// Default Constructor for Main Controller
-	public MainController(MainModel aModel, MainView aView){
+	public MainController(MainModel aModel, MainView aView, Member currentMember){
 
 		mainModel = aModel;
 		mainView = aView;
-
+		this.currentMember = currentMember;
+		
 		allMemberProjects = new ArrayList<Project>();
 		allMemberActivities = new ArrayList<Activity>();
 		allProjActs = new ArrayList< ArrayList<Activity> >();
@@ -75,6 +75,13 @@ public class MainController {
 		actPanel = (ActivityPanel) mainView.getActivityPanel();
 		projCombo = mainView.getExistingProjectsCombo();
 		actCombo = projPanel.getProjectActivitiesCombo();
+		
+		linkAll();
+		refreshAll();
+		setInitialPosition();
+		if( ! currentMember.isManager()){
+				disableManagerFeatures();
+		}
 		// registers all listeners to the view
 		registerListeners();
 	}
@@ -82,92 +89,7 @@ public class MainController {
 	///////////////////////////////////////////////////////////////////	Listeners	\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	//////////////////////// Private Classes for Listeners
 	
-	// inner class to implement loginListener
-	private class LoginListener implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent ev) {
-			String user = mainView.getLoginPage().getUsername();
-			String pass = mainView.getLoginPage().getPassword();
-			try {
-				Member member = mainModel.validateLogin(user, pass);
-				if(member == null){				// not a member nor a manager
-					JOptionPane.showMessageDialog(null, "Error! Wrong Username and/or Password.");
-					mainView.getLoginPage().clearLoginForm();
-				} else {
-					currentMember = member;
-					mainView.getLoginPage().setVisible(false);
-					mainView.setVisible(true);
-					linkAll();
-					refreshAll();
-					setInitialPosition();
-					 if( ! currentMember.isManager()){
-							disableManagerFeatures();
-						}
-				}
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		}
-	}
 	
-	// inner class to implement registerBtnListener
-	private class RegisterBtnListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-			mainView.getLoginPage().setVisible(false);
-			mainView.getLoginPage().getSignupFrame().setVisible(true);
-		}
-	}
-
-	// inner class to implement sign up a new member or project manager
-	private class SignupListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent event) {
-			String user = mainView.getLoginPage().getSignupFrame().getSignupUN();
-			int role = mainView.getLoginPage().getSignupFrame().getRole();
-			String pass = mainView.getLoginPage().getSignupFrame().getSignupPW();
-			String confirm = mainView.getLoginPage().getSignupFrame().getSignupCPW();
-			
-			if( user.isEmpty() || pass.isEmpty() || confirm.isEmpty() ) 							
-				JOptionPane.showMessageDialog(null, "Complete all fields");	
-			else if (!pass.equals(confirm)) 
-				JOptionPane.showMessageDialog(null, "Passwords do not match");	
-			else {
-				try {
-					mainModel.addMemberToDatabase(user, pass, role);
-					mainView.getLoginPage().getSignupFrame().dispose();
-					if(role == 0){
-						disableManagerFeatures();
-					}
-					mainView.setVisible(true);
-					//mainView.getLoginPage().setVisible(true);
-				} catch (SQLException e) {
-					if(e.getMessage().contains("UNIQUE")) {
-						JOptionPane.showMessageDialog(null, "This username is already taken!");	
-						mainView.getLoginPage().getSignupFrame().clearSignupForm();
-					}
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Error : Member Account was not created! try again.");
-					mainView.getLoginPage().getSignupFrame().clearSignupForm();
-				}
-				try {
-					currentMember = mainModel.getLastMember();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		} 				
-	}
-	
-	// inner class to implement cancel sign up in register form
-	private class CancelSignUpListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			mainView.getLoginPage().getSignupFrame().dispose();
-			mainView.getLoginPage().setVisible(true);
-		}		
-	}
 	
 	// inner class to implement Save/Edit/Modify Project
 	private class SaveProjectListener implements ActionListener {
@@ -761,7 +683,7 @@ public class MainController {
 	private class LogoutItemListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			mainView.dispose();
-			mainView.getLoginPage().setVisible(true);
+			new LoginController(new LoginView());
 		}
 	}
 	
@@ -1041,10 +963,6 @@ public class MainController {
 	
 	// registers all listeners
 	public void registerListeners(){
-		mainView.getLoginPage().addLoginListener(new LoginListener());
-		mainView.getLoginPage().addRegisterBtnListener(new RegisterBtnListener());
-		mainView.getLoginPage().getSignupFrame().addSignupListener(new SignupListener());
-		mainView.getLoginPage().getSignupFrame().addCancelSignUpListener(new CancelSignUpListener());
 		projPanel.addSaveListener(new SaveProjectListener());
 		projPanel.addDeleteListener(new DeleteProjectListener());
 		actPanel.addSaveListener(new SaveActivityListener());
