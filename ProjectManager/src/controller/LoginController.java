@@ -21,10 +21,9 @@ public class LoginController {
 
 	/**
 	 * @param loginView
-	 * @param mainModel
 	 */
-	public LoginController(LoginView loginView) {
-		this.loginView = loginView;
+	public LoginController() {
+		loginView = new LoginView();
 		signupView = new SignupView();
 		try {
 			mainModel = MainModel.getInstance();

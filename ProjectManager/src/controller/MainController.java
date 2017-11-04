@@ -683,7 +683,7 @@ public class MainController {
 	private class LogoutItemListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			mainView.dispose();
-			new LoginController(new LoginView());
+			new LoginController();
 		}
 	}
 	
