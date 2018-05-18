@@ -1,0 +1,298 @@
+/* Main CSS  */
+
+body {
+	margin:0;
+	padding:0;
+	line-height: 7em;
+}
+
+b {
+	font-size: 110%;
+}
+
+em {
+	color: red;
+}
+
+h1{
+	text-align: center;
+}
+
+h3 {
+	color: #ccddff;
+	font-family: Tahoma;
+	font-weight: bold;
+}
+
+p {
+	margin:20px;
+}
+
+input {
+	width: 300px;
+	text-align: center;
+	outline-color: red;
+	background-color:LightSlateGray;
+	font-size: 24px;
+	margin:5px;
+	padding:5px;
+}
+
+input[type="radio"] {
+	width: 40px;
+	height: 40px;
+	background-color: orange;
+	font-style: italic;
+	margin-left:30px;
+
+}
+
+input[type="button"] {
+	width:100px;
+	background-color:blue;
+	font-size: 20px;
+	font-style: italic;
+	border-radius: 8px 8px 8px 8px;
+	margin: 0 25px 0 25px;
+	outline-color: black;
+}
+
+input[type="submit"] {
+	margin-left: 50px;
+	float:left;
+	background-color: rgb(160, 30, 40);
+	width: 150px;
+	border-radius: 15px 0px 15px 0px;
+}
+
+input[type="reset"] {
+	margin-right: 50px;
+	float: right;
+	background-color: rgb(10, 100, 140);
+	width: 150px;
+	border-radius: 15px 0px 15px 0px;
+}
+
+label{
+	padding-left:50px;
+	font-size: 20px;
+	font-style: italic;
+	color:blue;
+}
+
+fieldset {
+	border-width: 5px;
+	border-style: double;
+}
+
+legend {
+	font-size: 24px;
+	font-family: lucida;
+	color:rgb(180, 40, 110);
+}
+
+textarea {
+	background-color: rgb(100, 180, 0);
+	font-family: sans-serif;
+	font-size: 20px;
+	font-variant: small-caps;
+	font-weight: bold;
+}
+
+table, th, td {
+	border-width: 5px;
+	border-style: groove;
+	border-radius: 10px; 
+}
+
+table {
+	margin-left: 50px;
+	padding: 5px;
+	border-color: rgb(46, 50, 77);
+}
+
+td,th {
+	border-color: rgb(246, 0, 177);
+	text-align: center;
+	padding: 15px;
+}
+
+#one {
+	text-align:center;
+	color:black;
+	font-style:italic;
+	font-family:Times, serif;
+	font-variant: small-caps;
+	font-weight: bolder;
+	font-size: 3em;
+	text-shadow:-5px -5px 5px Yellow;
+	border:ridge;
+}
+
+.inner {
+	padding: 30px;
+}
+
+#header {
+	font-family: sans-serif;
+	font-size: 15pt;
+	font-weight: bold;
+	background-size: 30% 117%;
+}
+
+#header h1 {
+	margin: 0px;
+	text-align: center;   
+	padding-top: 40px;
+}
+
+.left_align {
+	float:left;
+	width:220px;
+	padding-left: 20px;
+}
+
+#section {
+	float: left;
+	width: 86%;
+	background: linear-gradient(to bottom right, black, DarkTurquoise, SkyBlue, DarkViolet , black);
+	/*background: linear-gradient(to bottom right, rgb(20,50,50), rgb(120,130,150)  );*/
+	min-height: 1200px;
+	font-size: 15pt;
+	font-weight: bold;
+	line-height: 1.4;
+	text-indent: 30px;
+	height:auto;
+}
+
+#nav {
+	float:left;
+	width: 14%; 
+	min-height: 1200px;
+	background: SeaGreen ;
+}
+
+
+#nav ul {
+    padding-left:0px;
+    margin:0px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:20px;
+    color:#AAA;
+    list-style:none;
+    text-indent:10px;
+}
+
+#nav ul li {
+    background:linear-gradient(to right, yellow ,black);
+    line-height:40px;
+    border-bottom:2px solid #333;
+}
+
+#nav ul li a {
+    text-decoration:none;
+   	font-weight:bold;
+    color:black;
+}
+
+#nav ul ul li {
+    border-radius:4px 4px 0 0;
+    padding: 0px;
+    text-indent:25px;
+    list-style:none;
+    text-decoration:none;
+    display:block;
+    border-bottom:none;
+}
+
+#nav ul ul li a {
+ 	background:linear-gradient(to right, blue ,green);
+ 	margin: 10px;
+    color:red;
+   	font-weight:bold;
+   	font-style: italic;
+    display:block;
+    border-radius:10px 10px 10px 10px;
+}
+
+#nav ul li a:hover {
+	padding-top:5px;
+    background:Bisque ;
+    display: block;
+}
+
+#nav ul li a:active {
+    background:#ddeeff;
+}
+
+#footer {
+	clear: both;
+	font-size:16pt;
+	background:#2E2E2E;
+	color: #FFF;
+	text-align: center;
+	padding: 0px;
+	border: groove red;
+}
+
+#footer a {
+	background-color:DarkOrange;
+	border: solid black;
+}
+
+#regForm {
+	font-size: 20px;
+}
+
+.operation_form input[type="text"] {
+	width: 100px;
+	height:50px;
+	color:black;
+	outline-color: green;
+	background-color:yellow;
+	font-size: 26px;
+	font-weight: bold;
+	padding:5px;
+}
+
+.operation_form #op {
+	width: 50px;
+	outline-color: green;
+	background-color:rgb(200, 50, 130);
+	font-weight: bolder;
+	font-size: 26px;
+	padding:5px;
+}
+
+#result {
+	background-color:rgb(100, 100, 100)
+}
+
+.style1 {
+	color:#330033;
+}
+
+#go{
+	background-color:rgb(220, 150, 200);
+}
+
+.error {
+	color:red;
+}
+
+/* #qty {
+    width: 30px;
+    height: 20px;
+	text-align: center;
+	background-color: green;
+} */
+
+input.qtyplus { 
+	width:30px; 
+	height:30px;
+}
+
+input.qtyminus { 
+	width:30px; 
+	height:30px;
+}
